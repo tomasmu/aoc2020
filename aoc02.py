@@ -8,20 +8,20 @@ array = input
 
 #puzzle 1
 import re
-def isValid(string):
+def is_valid(string):
     [min, max, char, password] = re.split(r"-|: |\s", string)
     [min, max] = [int(min), int(max)]
     count = password.count(char)
     return count >= min and count <= max
 
-result1 = sum(int(isValid(n)) for n in array)
-print(result1)
+answer1 = sum(is_valid(n) for n in array)
+print(answer1)
 
 #puzzle 2
-def isValid2(string):
+def is_valid2(string):
     [min, max, char, password] = re.split(r"-|: |\s", string)
     [min, max] = [int(min), int(max)]
     return (password[min - 1] == char) ^ (password[max - 1] == char)
 
-result2 = sum(int(isValid2(n)) for n in array)
-print(result2)
+answer2 = sum(is_valid2(n) for n in array)
+print(answer2)
