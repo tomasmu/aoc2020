@@ -28,7 +28,7 @@ print (answer1)
 #puzzle 2
 import re
 def is_valid_height(height):
-    match = re.match("^(?P<value>\d{2,3})(?P<unit>cm|in)$", height)
+    match = re.search(r"^(?P<value>\d{2,3})(?P<unit>cm|in)$", height)
     if (not match):
         return False
     value, unit = int(match.group("value")), match.group("unit")
@@ -47,9 +47,9 @@ def is_valid_passport(passport):
         int(pass_dict['iyr']) >= 2010 and int(pass_dict['iyr']) <= 2020,
         int(pass_dict['eyr']) >= 2020 and int(pass_dict['eyr']) <= 2030,
         is_valid_height(pass_dict['hgt']),
-        bool(re.match("^#[0-9a-f]{6}$", pass_dict['hcl'])),
-        bool(re.match("^(amb|blu|brn|gry|grn|hzl|oth)$", pass_dict['ecl'])),
-        bool(re.match("^[0-9]{9}$", pass_dict['pid'])),
+        bool(re.search("^#[0-9a-f]{6}$", pass_dict['hcl'])),
+        bool(re.search("^(amb|blu|brn|gry|grn|hzl|oth)$", pass_dict['ecl'])),
+        bool(re.search("^[0-9]{9}$", pass_dict['pid'])),
     ]
     return all(requirements)
 
