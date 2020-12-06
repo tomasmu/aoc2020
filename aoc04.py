@@ -7,7 +7,6 @@ input = open(file).read().splitlines()
 array = input
 
 #puzzle 1
-import functools
 required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] #"cid"
 passport = []
 passports = []
