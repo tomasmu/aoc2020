@@ -4,7 +4,7 @@ file = os.path.basename(__file__).replace('.py', '.txt')
 input = open(file).read().splitlines()
 
 #format
-array = input #[int(n) for n in input]
+array = input
 
 #puzzle 1
 answer1 = ''
