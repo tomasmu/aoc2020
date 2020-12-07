@@ -12,7 +12,7 @@ def is_valid(string):
     [min, max, char, password] = re.split(r"-|: |\s", string)
     [min, max] = [int(min), int(max)]
     count = password.count(char)
-    return count >= min and count <= max
+    return min <= count <= max
 
 answer1 = sum(is_valid(n) for n in array)
 print(answer1)

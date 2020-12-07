@@ -42,9 +42,9 @@ def is_valid_passport(passport):
         return False
     pass_dict = dict(map(lambda x: x.split(":"), passport))
     requirements = [
-        int(pass_dict['byr']) >= 1920 and int(pass_dict['byr']) <= 2002,
-        int(pass_dict['iyr']) >= 2010 and int(pass_dict['iyr']) <= 2020,
-        int(pass_dict['eyr']) >= 2020 and int(pass_dict['eyr']) <= 2030,
+        1920 <= int(pass_dict['byr']) <= 2002,
+        2010 <= int(pass_dict['iyr']) <= 2020,
+        2020 <= int(pass_dict['eyr']) <= 2030,
         is_valid_height(pass_dict['hgt']),
         bool(re.search("^#[0-9a-f]{6}$", pass_dict['hcl'])),
         bool(re.search("^(amb|blu|brn|gry|grn|hzl|oth)$", pass_dict['ecl'])),
