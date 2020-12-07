@@ -7,7 +7,6 @@ input = open(file).read().splitlines()
 array = input
 
 #puzzle 1
-required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] #"cid"
 passport = []
 passports = []
 for line in array:
@@ -18,6 +17,7 @@ for line in array:
         passport.extend(line.split(" "))
 passports.append(passport)
 
+required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] #"cid"
 def has_required_fields(passport):
     return all(map(lambda req: " ".join(passport).find(req) != -1, required))
 
