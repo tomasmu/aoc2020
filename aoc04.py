@@ -1,25 +1,17 @@
 #input
 import os
 file = os.path.basename(__file__).replace('.py', '.txt')
-input = open(file).read().splitlines()
+input = open(file).read()
 
 #format
-array = input
+array = input.split('\n\n')
 
 #puzzle 1
-passport = []
-passports = []
-for line in array:
-    if (line == ''):
-        passports.append(passport)
-        passport = []
-    else:
-        passport.extend(line.split(" "))
-passports.append(passport)
+passports = [" ".join(line.splitlines()).split() for line in array]
 
-required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] #"cid"
 def has_required_fields(passport):
-    return all(map(lambda req: " ".join(passport).find(req) != -1, required))
+    required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] #"cid"
+    return all(map(lambda req: req in " ".join(passport), required))
 
 answer1 = sum(map(has_required_fields, passports))
 print (answer1)
@@ -28,17 +20,17 @@ print (answer1)
 import re
 def is_valid_height(height):
     match = re.search(r"^(?P<value>\d{2,3})(?P<unit>cm|in)$", height)
-    if (not match):
+    if not match:
         return False
     value, unit = int(match.group("value")), match.group("unit")
-    if (unit == 'cm'):
+    if unit == 'cm':
         return value >= 150 and value <= 193
-    if (unit == 'in'):
+    if unit == 'in':
         return value >= 59 and value <= 76
     return False
 
 def is_valid_passport(passport):
-    if (not has_required_fields(passport)):
+    if not has_required_fields(passport):
         return False
     pass_dict = dict(map(lambda x: x.split(":"), passport))
     requirements = [
@@ -53,4 +45,4 @@ def is_valid_passport(passport):
     return all(requirements)
 
 answer2 = sum(map(is_valid_passport, passports))
-print (answer2)
+print(answer2)
