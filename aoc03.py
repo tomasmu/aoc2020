@@ -22,4 +22,3 @@ def count_trees(step):
 
 answer2 = math.prod(map(count_trees, steps))
 print (answer2)
-#3517401300

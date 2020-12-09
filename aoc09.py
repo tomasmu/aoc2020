@@ -40,7 +40,8 @@ print(answer1)
 # puzzle 2
 #is this a false positive or do i not understand decorators? it is clearly working.. :)
 #pylint(no-value-for-parameter): No value for argument 'iterations' in function call
-@benchmark_it(1000)
+#@benchmark_it(1000)
+@time_it
 def contiguous_set(array, answer):
     for length in range(2, len(array) + 1):
         arr_sum = sum(array[0:length])

@@ -11,6 +11,7 @@ array = input.split('\n\n')
 answers = [line.split() for line in array]
 answer_groups = [[list(b) for b in a] for a in answers]
 
+#todo: this code is unreadable, i should rewrite both
 answer1 = sum(len(set().union(*(set(a) for a in g))) for g in answer_groups)
 print(answer1)
 
