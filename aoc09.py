@@ -5,6 +5,10 @@ import itertools
 import os
 import re
 
+#benchmark_it.py
+from benchmark_it import benchmark_it
+from benchmark_it import time_it
+
 # input
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 raw_input = open(file).read()
@@ -34,15 +38,18 @@ answer1 = find_nonsummable_number(puzzle, 25)
 print(answer1)
 
 # puzzle 2
+#is this a false positive or do i not understand decorators? it is clearly working.. :)
+#pylint(no-value-for-parameter): No value for argument 'iterations' in function call
+@benchmark_it(1000)
 def contiguous_set(array, answer):
-    for i in range(len(array)):
-        for j in range(i+2, len(array)):
-            arr = array[i:j]
-            arr_sum = sum(arr)
-            if arr_sum > answer:
-                break
+    for length in range(2, len(array) + 1):
+        arr_sum = sum(array[0:length])
+        for i in range(len(array) - length):
             if arr_sum == answer:
+                arr = array[i:i+length]
                 return min(arr) + max(arr)
+            arr_sum -= array[i]
+            arr_sum += array[i+length]
     return ['err', 'or']
 
 answer2 = contiguous_set(puzzle, answer1)
