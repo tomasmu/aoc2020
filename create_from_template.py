@@ -3,10 +3,9 @@ import os
 import shutil
 import sys
 
-if len(sys.argv) == 1:
-    #no argument given, take today's day
-    day = datetime.date.today().strftime("%d")
-else:
+#take day from argument or today's date
+day = datetime.date.today().strftime("%d")
+if len(sys.argv) >= 2:
     day = sys.argv[1].zfill(2)
 
 script_file = f"./aoc{day}.py"
@@ -22,4 +21,4 @@ shutil.copy('template.py', script_file)
 
 #create if not exists
 open(example_file, 'a')
-open(input_file, 'a')
+#open(input_file, 'a')
