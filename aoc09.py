@@ -21,13 +21,12 @@ puzzle = [int(n) for n in puzzle]
 
 # puzzle 1
 def find_nonsummable_number(array, preamble_len):
-    for i in range(len(array) - preamble_len):
-        preamble = array[i:i+preamble_len]
-        next_number = array[i+preamble_len]
+    for i in range(preamble_len, len(array)):
+        preamble = array[i - preamble_len:i]
         #pairs = [(a, b) for i, a in enumerate(preamble) for j, b in enumerate(preamble[i+1:])]
         pairs = itertools.combinations(preamble, 2)
-        is_not_summable = all(a + b != next_number for a, b in pairs)
-        if is_not_summable:
+        next_number = array[i]
+        if not any(a + b == next_number for a, b in pairs):
             return next_number
     return None
 
@@ -35,18 +34,16 @@ answer1 = find_nonsummable_number(puzzle, 25)
 print(answer1)
 
 # puzzle 2
-def find_contiguous_set(array, answer):
+def contiguous_set(array, answer):
     for i in range(len(array)):
-        for length in range(2, len(array) - i):
-            arr = array[i:i+length]
+        for j in range(i+2, len(array)):
+            arr = array[i:j]
             arr_sum = sum(arr)
             if arr_sum > answer:
                 break
             if arr_sum == answer:
-                return arr
+                return min(arr) + max(arr)
     return ['err', 'or']
 
-contiguous_set = find_contiguous_set(puzzle, answer1)
-
-answer2 = min(contiguous_set) + max(contiguous_set)
+answer2 = contiguous_set(puzzle, answer1)
 print(answer2)
