@@ -2,7 +2,7 @@ import re
 import os
 
 # input
-file = os.path.basename(__file__).replace('.py', '.txt')
+file = os.path.basename(__file__).replace('.py', '_input.txt')
 input = open(file).read()
 
 # format
