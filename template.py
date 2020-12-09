@@ -1,23 +1,26 @@
 # imports
 import collections
 import functools
+import itertools
+import math
 import os
 import re
 
 # input
 file = os.path.basename(__file__).replace('.py', '_input.txt')
-input = open(file).read()
+raw_input = open(file).read()
 
-# format
-if re.search('\n\n', input):
-    array = input.split('\n\n')
-    #array = [arr.splitlines() for arr in input.split('\n\n')]
-else:
-    array = input.splitlines()
+def format_input(array):
+    if re.search('\n\n', array):
+        return array.split('\n\n')
+    else:
+        return array.splitlines()
+
+puzzle = format_input(raw_input)
 
 # puzzle 1
 
-answer1 = array
+answer1 = puzzle
 print(answer1)
 
 # puzzle 2
