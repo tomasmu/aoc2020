@@ -7,16 +7,15 @@ import os
 import re
 
 # input
+file = os.path.basename(__file__).replace('.py', '_example.txt')
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 raw_input = open(file).read()
+print("input:", file)
 
-def format_input(array):
-    if re.search('\n\n', array):
-        return array.split('\n\n')
-    else:
-        return array.splitlines()
-
-puzzle = format_input(raw_input)
+if re.search('\n\n', raw_input):
+    puzzle = raw_input.split('\n\n')
+else:
+    puzzle = raw_input.splitlines()
 
 # puzzle 1
 
