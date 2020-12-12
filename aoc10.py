@@ -17,7 +17,7 @@ if re.search('\n\n', raw_input):
 else:
     puzzle = raw_input.splitlines()
 
-puzzle = sorted([int(n) for n in puzzle])
+puzzle = sorted(int(n) for n in puzzle)
 puzzle = [0, *puzzle, max(puzzle) + 3]
 
 # puzzle 1
