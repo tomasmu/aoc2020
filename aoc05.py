@@ -1,7 +1,7 @@
 # input
 import os
 import re
-file = os.path.basename(__file__).replace('.py', '.txt')
+file = os.path.basename(__file__).replace('.py', '_input.txt')
 input = open(file).read()
 
 # format
@@ -22,8 +22,16 @@ def get_seat_array(chars):
     return 8 * get_pos(rows, chars[0:7]) + get_pos(cols, chars[7:])
 
 # puzzle 1, after realising input represents binary numbers
+#replace multiple strings in one pass
+def table_replace(text, table):
+    pattern = "|".join([re.escape(s) for s in sorted(table, key = len, reverse = True)])
+    regex = re.compile(pattern)
+    return regex.sub(lambda m: table[m.group(0)], text)
+
 def get_seat(chars):
-    return int(chars.replace("F", "0").replace("L", "0").replace("B", "1").replace("R", "1"), 2)
+    #return int(chars.replace('F', '0').replace('L', '0').replace('B', '1').replace('R', '1'), 2)
+    #return int(re.sub('F|L', '0', re.sub('B|R', '1', chars)), 2)
+    return int(table_replace(chars, { 'F': '0', 'L': '0', 'B': '1', 'R': '1' }), 2)
 
 answer1 = max(map(get_seat, array))
 print(answer1)

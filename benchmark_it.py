@@ -23,11 +23,11 @@ def benchmark_it(function, iterations):
 
 def time_it(func):
     def f(*args):
-        t0 = time.time()
+        t0 = time.perf_counter_ns()
         result = func(*args)
-        t1 = time.time()
+        t1 = time.perf_counter_ns()
 
-        print(f'{func.__name__} took {1000*(t1 - t0):.6f} ms')
+        print(f'{func.__name__} took {(t1 - t0)/1000:.6f} ms')
         return result
 
     return f

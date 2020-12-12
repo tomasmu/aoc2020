@@ -47,4 +47,4 @@ input_file = f"./aoc{day}_input.txt"
 file = open(input_file, 'w')
 file.write(puzzle_input)
 print(puzzle_input)
-print(f"saved {len(puzzle_input)} lines to:", input_file)
+print(f"saved {len(lines)} lines to:", input_file)

@@ -34,7 +34,7 @@ def get_value(instructions):
     i = 0
     visited = set()
     accumulator = 0
-    while i != len(instructions):
+    while i < len(instructions):
         if i in visited:
             return None
         visited.add(i)
