@@ -71,7 +71,7 @@ def move_boaty_waypoint(puzzle):
         elif action in rotate_table:
             waypoint = rotate_clockwise(waypoint, value * rotate_table[action])
         elif action == 'F':
-            coordinate = coordinate + value * waypoint
+            coordinate += value * waypoint
     return sum(abs(n) for n in coordinate)
 
 answer2 = move_boaty_waypoint(puzzle)
