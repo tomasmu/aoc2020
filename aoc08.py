@@ -15,14 +15,12 @@ def get_value_at_loop(instructions):
     visited = set()
     accumulator = 0
     while i not in visited:
-        op, arg = instructions[i]
         visited.add(i)
+        op, arg = instructions[i]
         if op == 'acc':
             accumulator += arg
         elif op == 'jmp':
             i += (arg - 1)
-        elif op == 'nop':
-            pass
         i += 1
     return accumulator
 
@@ -43,8 +41,6 @@ def get_value(instructions):
             accumulator += arg
         elif op == 'jmp':
             i += (arg - 1)
-        elif op == 'nop':
-            pass
         i += 1
     return accumulator
 

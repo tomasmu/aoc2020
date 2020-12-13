@@ -9,13 +9,10 @@ import re
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 raw_input = open(file).read()
 
-def format_input(array):
-    if re.search('\n\n', array):
-        return array.split('\n\n')
-    else:
-        return array.splitlines()
-
-puzzle = format_input(raw_input)
+if re.search('\n\n', raw_input):
+    puzzle = raw_input.split('\n\n')
+else:
+    puzzle = raw_input.splitlines()
 
 puzzle = [int(n) for n in puzzle]
 
@@ -23,10 +20,9 @@ puzzle = [int(n) for n in puzzle]
 def find_nonsummable_number(array, preamble_len):
     for i in range(preamble_len, len(array)):
         preamble = array[i - preamble_len:i]
-        #pairs = [(a, b) for i, a in enumerate(preamble) for j, b in enumerate(preamble[i+1:])]
         pairs = itertools.combinations(preamble, 2)
         next_number = array[i]
-        if not any(a + b == next_number for a, b in pairs):
+        if all(a + b != next_number for a, b in pairs):
             return next_number
     return None
 
@@ -43,7 +39,7 @@ def contiguous_set(array, answer):
                 return min(arr) + max(arr)
             arr_sum -= array[i]
             arr_sum += array[i+length]
-    return ['err', 'or']
+    return None
 
 answer2 = contiguous_set(puzzle, answer1)
 print(answer2)

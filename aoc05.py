@@ -11,9 +11,9 @@ array = input.splitlines()
 def get_pos(arr, chars):
     if len(chars) == 0:
         return arr[0]
-    if re.match("F|L", chars[0]):
+    if re.match('F|L', chars[0]):
         return get_pos(arr[:int(len(arr)/2)], chars[1:])
-    if re.match("B|R", chars[0]):
+    if re.match('B|R', chars[0]):
         return get_pos(arr[int(len(arr)/2):], chars[1:])
 
 def get_seat_array(chars):
@@ -24,12 +24,11 @@ def get_seat_array(chars):
 # puzzle 1, after realising input represents binary numbers
 #replace multiple strings in one pass
 def table_replace(text, table):
-    pattern = "|".join([re.escape(s) for s in sorted(table, key = len, reverse = True)])
+    pattern = '|'.join([re.escape(s) for s in sorted(table, key = len, reverse = True)])
     regex = re.compile(pattern)
     return regex.sub(lambda m: table[m.group(0)], text)
 
 def get_seat(chars):
-    #return int(chars.replace('F', '0').replace('L', '0').replace('B', '1').replace('R', '1'), 2)
     #return int(re.sub('F|L', '0', re.sub('B|R', '1', chars)), 2)
     return int(table_replace(chars, { 'F': '0', 'L': '0', 'B': '1', 'R': '1' }), 2)
 
