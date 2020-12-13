@@ -1,23 +1,17 @@
 # input
-import collections
+import functools
 import os
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 input = open(file).read()
 
 # format
 array = input.split('\n\n')
+puzzle = [line.split() for line in array]
 
 # puzzle 1
-answers = [line.split() for line in array]
-answer_groups = [[list(b) for b in a] for a in answers]
-
-#todo: this code is unreadable, i should rewrite both
-#apan?
-answer1 = sum(len(set().union(*(set(a) for a in g))) for g in answer_groups)
+answer1 = sum(len(set().union(*group)) for group in puzzle)
 print(answer1)
 
 # puzzle 2
-def flatten_array(arr): return [x for xs in arr for x in xs]
-
-answer2 = sum(list(collections.Counter(flatten_array(g)).values()).count(len(g)) for g in answer_groups)
+answer2 = sum(len(set(first).intersection(*rest)) for first, *rest in puzzle)
 print(answer2)
