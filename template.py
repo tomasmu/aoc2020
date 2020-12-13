@@ -3,6 +3,7 @@ import collections
 import functools
 import itertools
 import math
+import numpy
 import os
 import re
 
@@ -10,7 +11,7 @@ import re
 file = os.path.basename(__file__).replace('.py', '_example.txt')
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 raw_input = open(file).read()
-print("input:", file)
+print('input:', file)
 
 if re.search('\n\n', raw_input):
     puzzle = raw_input.split('\n\n')
