@@ -10,7 +10,7 @@ import re
 file = os.path.basename(__file__).replace('.py', '_example.txt')
 file = os.path.basename(__file__).replace('.py', '_input.txt')
 raw_input = open(file).read()
-print("input:", file)
+print('input:', file)
 
 if re.search('\n\n', raw_input):
     puzzle = raw_input.split('\n\n')
@@ -20,8 +20,8 @@ else:
 puzzle = [list(row) for row in puzzle]
 
 # puzzle 1
-def print_puzzle(puzzle, text="printing"):
-    print("test\n", "\n".join(["".join(row) for row in puzzle]), sep = '')
+def print_puzzle(puzzle, text='printing'):
+    print(f'{text}\n', '\n'.join([''.join(row) for row in puzzle]), sep = '')
 
 STEPS = [(dr, dc) for dr, dc in itertools.product([0, 1, -1], repeat = 2) if dr != 0 or dc != 0]
 def count_adjacent(matrix, row, col, char):
@@ -29,9 +29,7 @@ def count_adjacent(matrix, row, col, char):
     for dr, dc in STEPS:
         r = row + dr
         c = col + dc
-        if r < 0 or c < 0 or r >= len(matrix) or c >= len(matrix[r]):
-            continue
-        if matrix[r][c] == char:
+        if r >= 0 and c >= 0 and r < len(matrix) and c < len(matrix[r]) and matrix[r][c] == char:
             count += 1
     return count
 
@@ -43,12 +41,12 @@ def get_new_matrix(matrix, count_method, occupied_limit):
         for c in range(len(puzzle[r])):
             if matrix[r][c] == EMPTY and count_method(matrix, r, c, OCCUPIED) == 0:
                 new_matrix[r][c] = OCCUPIED
-            if matrix[r][c] == OCCUPIED and count_method(matrix, r, c, OCCUPIED) >= occupied_limit:
+            elif matrix[r][c] == OCCUPIED and count_method(matrix, r, c, OCCUPIED) >= occupied_limit:
                 new_matrix[r][c] = EMPTY
     return new_matrix
 
 def matrix_equals(left, right):
-    return "".join(["".join(row) for row in left]) == "".join(["".join(row) for row in right])
+    return ''.join([''.join(row) for row in left]) == ''.join([''.join(row) for row in right])
 
 def seating_process(matrix, count_method, occupied_limit):
     new_matrix = get_new_matrix(matrix, count_method, occupied_limit)
