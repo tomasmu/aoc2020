@@ -22,16 +22,13 @@ else:
 numbers = [int(n) for n in puzzle[0].split(',')]
 
 def get_nth_number(numbers, n):
-    *init, prev = numbers
-    seen_times = dict((n, i) for i, n in enumerate(init))
-    for t in range(len(init), n - 1):
-        if prev not in seen_times:
-            next_ = 0
-        else:
-            next_ = t - seen_times[prev]
-        seen_times[prev] = t
-        prev = next_
-    return next_
+    history = {n: i + 1 for i, n in enumerate(numbers)}
+    prev = numbers[-1]
+    for t in range(len(numbers), n):
+        current = t - history.get(prev, t)
+        history[prev] = t
+        prev = current
+    return current
 
 answer1 = get_nth_number(numbers, 2020)
 print(answer1)
