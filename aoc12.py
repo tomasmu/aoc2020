@@ -54,19 +54,6 @@ answer1 = move_boaty_boat(puzzle)
 print(answer1)
 
 # puzzle 2
-#testing various rotation methods
-# def rotate_clockwise(coordinate, a):
-#     a %= 360    #never negative in python
-#     cos_a = { 0: 1, 90: 0, 180: -1, 270: 0 }[a]
-#     sin_a = { 0: 0, 90: 1, 180: 0, 270: -1 }[a]
-#     rotation_cw = [[cos_a, sin_a], [-sin_a, cos_a]]
-#     return rotation_cw @ coordinate
-# def rotate_clockwise(coordinate, a):
-#     a %= 360
-#     if a == 0: return coordinate
-#     if a == 90: return numpy.array([coordinate[1], -coordinate[0]])
-#     if a == 180: return numpy.array([-coordinate[0], -coordinate[1]])
-#     if a == 270: return numpy.array([-coordinate[1], coordinate[0]])
 def rotate_clockwise(coordinate, a):
     z = complex(*coordinate) * (-1j) ** int(a % 360 / 90)
     return numpy.array([int(z.real), int(z.imag)])
